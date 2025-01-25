@@ -1,39 +1,53 @@
-const inputBox = document.getElementById('input__box');
-const listContainer = document.getElementById('list__container');
-const darkModeBtn = document.querySelector('.darc__mond');
-const lightModeBtn = document.querySelector('.blc__mond');
+const inputBox = document.getElementById("input__box");
+const listContainer = document.getElementById("list__container");
 
 function addTask() {
-    if (inputBox.value === '') {
-        alert('You must write a task');
-    } else {
-        let li = document.createElement('li');
-        li.textContent = inputBox.value;
+  if (inputBox.value === "") {
+    alert("You must write a task");
+  } else {
+    let li = document.createElement("li");
+    let box = document.createElement("div");
+    const title = document.createElement("h2");
+    const inp = document.createElement("input");
 
-        let btnDlt = document.createElement('img');
-        btnDlt.src = 'images/trash-svgrepo-com 1.png';
-        btnDlt.alt = 'Delete';
-        btnDlt.style.cursor = 'pointer';
-        li.appendChild(btnDlt);
-li.className = 'li__idm'
-        btnDlt.className = 'btn__delit'
-        
-        btnDlt.addEventListener('click', () => {
-            li.remove();
-        });
+    title.textContent = inputBox.value;
+    let deleteButton = document.createElement("button");
+    deleteButton.className = "delet";
+    deleteButton.textContent = "Delete";
 
-        listContainer.appendChild(li);
+    li.className = "box1";
+    box.className = "box";
+    inp.type = "checkbox";
+    box.append(inp, title);
 
-        inputBox.value = '';
-    }
+    li.append(box, deleteButton);
+    listContainer.appendChild(li);
+
+    inp.addEventListener("change", () => {
+      if (inp.checked) {
+        title.style.textDecoration = "line-through";
+      } else {
+        title.style.textDecoration = "none";
+      }
+    });
+
+    deleteButton.addEventListener("click", () => {
+      li.remove();
+    });
+
+    inputBox.value = "";
+  }
 }
 
-darkModeBtn.addEventListener('click', () => {
-    document.body.style.backgroundColor = '#333';
-    document.body.style.color = '#fff';
+const darkModeBtn = document.querySelector(".darc__mond");
+const lightModeBtn = document.querySelector(".blc__mond");
+
+darkModeBtn.addEventListener("click", () => {
+  document.body.style.backgroundColor = "#333";
+  document.body.style.color = "#fff";
 });
 
-lightModeBtn.addEventListener('click', () => {
-    document.body.style.backgroundColor = '#fff';
-    document.body.style.color = '#000';
+lightModeBtn.addEventListener("click", () => {
+  document.body.style.backgroundColor = "#fff";
+  document.body.style.color = "#000";
 });
